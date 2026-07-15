@@ -1,0 +1,6 @@
+.git
+_site
+work
+node_modules
+.DS_Store
+*.zip
