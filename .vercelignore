@@ -1,6 +1,8 @@
 .git
 _site
 work
+dist
 node_modules
 .DS_Store
 *.zip
+server.mjs
