@@ -9,6 +9,14 @@
 }
 
 @font-face {
+  font-family: "FZLanTingHeiJianTi";
+  src: url("../fonts/FZLanTingHei_GBK.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "FZLanTingZhongCuHeiJian";
   src: url("../fonts/FZLanTingZhongCuHeiJian.ttf") format("truetype");
   font-weight: 700;
@@ -108,18 +116,20 @@ body.is-modal-open {
   top: 390px;
   width: 1636px;
   height: 1270px;
-  cursor: none;
+  cursor: grab;
   touch-action: none;
 }
 
-.globe-stage:active {
-  cursor: none;
+.globe-stage:active,
+.globe-stage:active canvas {
+  cursor: grabbing;
 }
 
 .globe-stage canvas {
   display: block;
   width: 100%;
   height: 100%;
+  cursor: grab;
 }
 
 .nav-guard {
@@ -202,7 +212,7 @@ body.is-modal-open {
   font-size: 95px;
   line-height: 1;
   font-weight: 700;
-  letter-spacing: 6px;
+  letter-spacing: 2px;
   white-space: nowrap;
 }
 
@@ -410,9 +420,10 @@ body.is-modal-open {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 1em;
+  width: 100%;
+  height: 100%;
   line-height: 1;
-  transform: translateY(-0.04em);
+  transform: translateY(-3px);
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -671,10 +682,11 @@ body.is-modal-open {
   left: calc(427px * var(--stage-scale));
   top: calc(190px * var(--stage-scale));
   margin: 0;
-  font-size: calc(92px * var(--stage-scale));
+  font-family: "FZLanTingZhongCuHeiJian", "方正兰亭中粗黑", "方正兰亭中粗黑简体", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: calc(90px * var(--stage-scale));
   line-height: 1.08;
-  font-weight: 800;
-  letter-spacing: 0;
+  font-weight: 700;
+  letter-spacing: calc(2px * var(--stage-scale));
 }
 
 .live-subtitle {
@@ -682,9 +694,11 @@ body.is-modal-open {
   top: calc(314px * var(--stage-scale));
   margin: 0;
   color: #a9a9a9;
-  font-size: calc(28px * var(--stage-scale));
+  font-family: "FZLanTingXiHeiJian", "方正兰亭细黑", "FZLanTYJW_Xi", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: calc(26px * var(--stage-scale));
   line-height: 1.4;
-  font-weight: 400;
+  font-weight: 300;
+  letter-spacing: calc(1px * var(--stage-scale));
 }
 
 .live-stats {
@@ -914,11 +928,20 @@ body.is-modal-open {
 .live-hot-item {
   position: absolute;
   left: 0;
+  display: block;
   width: calc(370px * var(--stage-scale));
   height: calc(106px * var(--stage-scale));
   padding: calc(21px * var(--stage-scale)) calc(33px * var(--stage-scale));
   overflow: hidden;
   color: #3b3d55;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.live-hot-item:hover,
+.live-hot-item:focus-visible {
+  outline: none;
+  filter: brightness(1.02);
 }
 
 .live-hot-item:nth-child(1) {
@@ -989,6 +1012,9 @@ body.is-modal-open {
   width: 100%;
   height: 100%;
   user-select: none;
+  image-rendering: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .logo-card:hover,
@@ -1043,6 +1069,247 @@ body.is-modal-open {
 
 .logo-card-white.is-hovered {
   z-index: 3;
+}
+
+.logo-section-copy {
+  position: absolute;
+  z-index: 41;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: calc((1060px + 8394px) * var(--stage-scale));
+  pointer-events: none;
+}
+
+.logo-section-mask {
+  position: absolute;
+  z-index: 0;
+  background: #000;
+  pointer-events: none;
+}
+
+.logo-section-title-mask {
+  left: calc(390px * var(--stage-scale));
+  top: calc((1160px + 3182px) * var(--stage-scale));
+  width: calc(548px * var(--stage-scale));
+  height: calc(250px * var(--stage-scale));
+}
+
+.logo-section-button-mask {
+  left: calc(398px * var(--stage-scale));
+  top: calc((1160px + 3424px) * var(--stage-scale));
+  width: calc(520px * var(--stage-scale));
+  height: calc(140px * var(--stage-scale));
+}
+
+.logo-section-heading {
+  position: absolute;
+  z-index: 1;
+  left: calc(421px * var(--stage-scale));
+  top: calc((1160px + 3205px) * var(--stage-scale));
+  margin: 0;
+  color: #fff;
+  font-family: "FZLanTingZhongCuHeiJian", "方正兰亭中粗黑简体", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: calc(88px * var(--stage-scale));
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: calc(2px * var(--stage-scale));
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.logo-section-heading span {
+  display: block;
+}
+
+.logo-section-heading span + span {
+  font-size: calc(83px * var(--stage-scale));
+}
+
+.logo-section-btn {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: calc((1160px + 3445px) * var(--stage-scale));
+  height: calc(93px * var(--stage-scale));
+  border-radius: calc(47px * var(--stage-scale));
+  font-family: "FZLanTingZhongCuHeiJian", "方正兰亭中粗黑简体", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: calc(30px * var(--stage-scale));
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: calc(2px * var(--stage-scale));
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transform-origin: 50% 50%;
+}
+
+.logo-section-btn-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1em;
+  line-height: 1;
+  transform: translateY(2px);
+}
+
+.logo-section-btn:hover,
+.logo-section-btn:focus-visible {
+  animation: button-breathe 760ms ease-in-out;
+  outline: none;
+}
+
+.logo-section-btn-cn {
+  left: calc(426px * var(--stage-scale));
+  width: calc(220px * var(--stage-scale));
+  background: #fff;
+  color: #000;
+}
+
+.logo-section-btn-global {
+  left: calc(660px * var(--stage-scale));
+  width: calc(240px * var(--stage-scale));
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(42, 42, 42, 0.5);
+  color: #fff;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.14),
+    0 calc(10px * var(--stage-scale)) calc(24px * var(--stage-scale)) rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px) saturate(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+}
+
+.product-logo-section {
+  position: absolute;
+  z-index: 42;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: calc((1060px + 8394px) * var(--stage-scale));
+  pointer-events: none;
+}
+
+.product-logo-title-mask {
+  position: absolute;
+  z-index: 0;
+  left: calc(350px * var(--stage-scale));
+  top: calc((1160px + 5250px) * var(--stage-scale));
+  width: calc(1040px * var(--stage-scale));
+  height: calc(390px * var(--stage-scale));
+  background: #fff;
+  pointer-events: none;
+}
+
+.product-logo-heading {
+  position: absolute;
+  z-index: 1;
+  left: calc(421px * var(--stage-scale));
+  top: calc((1160px + 5334px) * var(--stage-scale));
+  margin: 0;
+  color: #000;
+  font-family: "FZLanTingZhongCuHeiJian", "方正兰亭中粗黑简体", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: calc(90px * var(--stage-scale));
+  line-height: 1.18;
+  font-weight: 700;
+  letter-spacing: calc(2px * var(--stage-scale));
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.product-logo-heading span {
+  display: block;
+}
+
+.product-logo-card {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: calc(830px * var(--stage-scale));
+  height: calc(510px * var(--stage-scale));
+  user-select: none;
+  pointer-events: none;
+  image-rendering: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.product-logo-card-mine {
+  left: calc(420px * var(--stage-scale));
+  top: calc((1160px + 5658px) * var(--stage-scale));
+}
+
+.product-logo-card-dynamic {
+  left: calc(1320px * var(--stage-scale));
+  top: calc((1160px + 5658px) * var(--stage-scale));
+}
+
+.product-logo-card-wiki {
+  left: calc(420px * var(--stage-scale));
+  top: calc((1160px + 6188px) * var(--stage-scale));
+}
+
+.product-logo-card-fanxing {
+  left: calc(1320px * var(--stage-scale));
+  top: calc((1160px + 6188px) * var(--stage-scale));
+}
+
+.product-logo-download {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(137px * var(--stage-scale));
+  height: calc(71px * var(--stage-scale));
+  border-radius: calc(36px * var(--stage-scale));
+  background: #000;
+  color: #fff;
+  font-family: "FZLanTingZhongCuHeiJian", "方正兰亭中粗黑简体", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: calc(26px * var(--stage-scale));
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: calc(2px * var(--stage-scale));
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transform-origin: 50% 50%;
+}
+
+.product-logo-download:hover,
+.product-logo-download:focus-visible {
+  animation: button-breathe 760ms ease-in-out;
+  outline: none;
+}
+
+.product-logo-download-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1em;
+  line-height: 1;
+  transform: translateY(2px);
+}
+
+.product-logo-download-mine {
+  left: calc(750px * var(--stage-scale));
+  top: calc((1160px + 5958px) * var(--stage-scale));
+}
+
+.product-logo-download-dynamic {
+  left: calc(1555px * var(--stage-scale));
+  top: calc((1160px + 5958px) * var(--stage-scale));
+}
+
+.product-logo-download-wiki {
+  left: calc(741px * var(--stage-scale));
+  top: calc((1160px + 6456px) * var(--stage-scale));
+}
+
+.product-logo-download-fanxing {
+  left: calc(1554px * var(--stage-scale));
+  top: calc((1160px + 6457px) * var(--stage-scale));
 }
 
 .download-hotspots {
@@ -1173,6 +1440,7 @@ body.is-modal-open {
   top: calc((1160px + 5948px) * var(--stage-scale));
   width: calc(148px * var(--stage-scale));
   height: calc(84px * var(--stage-scale));
+  pointer-events: none;
 }
 
 .download-hotspot-product-mine::before {
@@ -1186,6 +1454,7 @@ body.is-modal-open {
   top: calc((1160px + 5948px) * var(--stage-scale));
   width: calc(148px * var(--stage-scale));
   height: calc(84px * var(--stage-scale));
+  pointer-events: none;
 }
 
 .download-hotspot-product-dynamic::before {
@@ -1199,6 +1468,7 @@ body.is-modal-open {
   top: calc((1160px + 6388px) * var(--stage-scale));
   width: calc(148px * var(--stage-scale));
   height: calc(84px * var(--stage-scale));
+  pointer-events: none;
 }
 
 .download-hotspot-product-wiki::before {
@@ -1212,6 +1482,7 @@ body.is-modal-open {
   top: calc((1160px + 6388px) * var(--stage-scale));
   width: calc(148px * var(--stage-scale));
   height: calc(84px * var(--stage-scale));
+  pointer-events: none;
 }
 
 .download-hotspot-product-juliang::before {
@@ -1225,6 +1496,7 @@ body.is-modal-open {
   top: calc((1160px + 8110px) * var(--stage-scale));
   width: calc(170px * var(--stage-scale));
   height: calc(72px * var(--stage-scale));
+  pointer-events: none;
 }
 
 .download-hotspot-vis-manual::before {
@@ -1238,12 +1510,244 @@ body.is-modal-open {
   top: calc((1160px + 8110px) * var(--stage-scale));
   width: calc(175px * var(--stage-scale));
   height: calc(72px * var(--stage-scale));
+  pointer-events: none;
 }
 
 .download-hotspot-vis-pdf::before {
   background-image: url("../images/baike-content.png");
   background-size: calc(2436px * var(--stage-scale)) calc(8394px * var(--stage-scale));
   background-position: calc(-1360px * var(--stage-scale)) calc(-8110px * var(--stage-scale));
+}
+
+.vis-download-section {
+  position: absolute;
+  z-index: 44;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: calc((1060px + 8394px) * var(--stage-scale));
+  pointer-events: none;
+}
+
+.vis-download-title-mask {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: calc((1160px + 7110px) * var(--stage-scale));
+  width: 100vw;
+  height: calc(132px * var(--stage-scale));
+  background: #000;
+  pointer-events: none;
+}
+
+.vis-download-title {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  top: calc((1160px + 7140px) * var(--stage-scale));
+  width: 100vw;
+  margin: 0;
+  color: #fff;
+  font-family: "FZLanTingZhongCuHeiJian", "方正兰亭中粗黑简体", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: calc(90px * var(--stage-scale));
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: calc(2px * var(--stage-scale));
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.vis-download-mask {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  top: calc((1160px + 7220px) * var(--stage-scale));
+  width: 100vw;
+  height: calc(1174px * var(--stage-scale));
+  background:
+    linear-gradient(180deg, #000 0%, #000 43%, #071342 61%, #163bd2 82%, #2557ff 100%);
+  pointer-events: none;
+}
+
+.vis-carousel-window {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: calc((1160px + 7180px) * var(--stage-scale));
+  width: 100vw;
+  height: calc(884px * var(--stage-scale));
+  overflow: hidden;
+  cursor: ew-resize;
+  touch-action: pan-y;
+  user-select: none;
+  pointer-events: auto;
+}
+
+.vis-carousel-window:active {
+  cursor: grabbing;
+}
+
+.vis-carousel-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.vis-slide-frame {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(1096px * var(--stage-scale));
+  aspect-ratio: 1096 / 648;
+  padding: 0;
+  border: 0;
+  border-radius: calc(36px * var(--stage-scale));
+  background: transparent;
+  cursor: ew-resize;
+  overflow: hidden;
+  opacity: var(--vis-slide-opacity, 1);
+  filter: brightness(var(--vis-slide-brightness, 1));
+  transform: translate(-50%, -50%) translateX(calc(var(--vis-slide-x, 0) * 1vw)) scale(var(--vis-slide-scale, 1));
+  appearance: none;
+  outline: none;
+  transition:
+    opacity 720ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 720ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 920ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
+}
+
+.vis-carousel-window.is-dragging .vis-slide-frame {
+  transition: none;
+}
+
+.vis-slide-frame:focus,
+.vis-slide-frame:focus-visible {
+  outline: none;
+}
+
+.vis-slide-frame.is-active {
+  z-index: 4;
+}
+
+.vis-slide-frame.is-adjacent {
+  z-index: 2;
+}
+
+.vis-slide-frame.is-outer {
+  z-index: 1;
+  pointer-events: none;
+}
+
+.vis-slide-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  pointer-events: none;
+}
+
+.vis-download-footer {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: calc((1160px + 7996px) * var(--stage-scale));
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.vis-download-link {
+  position: relative;
+  display: block;
+  width: calc(var(--vis-button-width) * 0.8 * var(--stage-scale));
+  height: calc(75.2px * var(--stage-scale));
+  padding: 0;
+  border-radius: calc(37.6px * var(--stage-scale));
+  border: calc(2px * var(--stage-scale)) solid rgba(255, 255, 255, 0.3);
+  background: rgba(160, 177, 195, 0.18);
+  color: #fff;
+  font-family: "FZLanTingZhongCuHeiJian", "方正兰亭中粗黑简体", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: calc(24px * var(--stage-scale));
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: calc(2px * var(--stage-scale));
+  text-decoration: none;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.vis-download-link:hover,
+.vis-download-link:focus-visible {
+  outline: none;
+  animation: button-breathe 760ms ease-in-out;
+  filter: drop-shadow(0 calc(12px * var(--stage-scale)) calc(28px * var(--stage-scale)) rgba(74, 112, 255, 0.35));
+}
+
+.vis-download-label {
+  position: absolute;
+  left: 0;
+  right: calc((136px + 7.2px) * var(--stage-scale));
+  top: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: calc(var(--vis-label-size, 24px) * var(--stage-scale));
+  letter-spacing: calc(2px * var(--stage-scale));
+  white-space: nowrap;
+  user-select: none;
+}
+
+.vis-download-label-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  height: 1em;
+  line-height: 1;
+  padding-left: calc(2px * var(--stage-scale));
+  text-align: center;
+  transform: translateY(2px);
+}
+
+.vis-download-pill {
+  position: absolute;
+  right: calc(7.2px * var(--stage-scale));
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: calc(136px * var(--stage-scale));
+  height: calc(60.8px * var(--stage-scale));
+  border-radius: calc(30.4px * var(--stage-scale));
+  background: #fff;
+  color: #000;
+  font-family: "FZLanTingZhongCuHeiJian", "方正兰亭中粗黑简体", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: calc(24px * var(--stage-scale));
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.vis-download-pill-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1em;
+  line-height: 1;
+  text-align: center;
+  transform: translateY(2px);
 }
 
 .spec-modal {
@@ -1291,7 +1795,7 @@ body.is-modal-open {
   width: 100%;
   height: 80.8%;
   overflow: hidden;
-  cursor: grab;
+  cursor: ew-resize;
   touch-action: pan-y;
   user-select: none;
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 8.5%, #000 91.5%, transparent 100%);
@@ -1345,7 +1849,7 @@ body.is-modal-open {
   border-radius: 3.56% / 6.02%;
   background: transparent;
   box-shadow: 0 34px 100px rgba(0, 0, 0, 0.58);
-  cursor: pointer;
+  cursor: ew-resize;
   overflow: hidden;
   outline: none;
   appearance: none;
@@ -1466,7 +1970,7 @@ body.is-modal-open {
 
 .spec-download-link {
   display: block;
-  width: min(calc(var(--spec-button-width) * 0.588), 8.68vw);
+  width: min(calc(var(--spec-button-width) * 0.635), 9.37vw);
   border-radius: 47px;
   transition: transform 180ms ease, filter 180ms ease;
 }
@@ -1545,12 +2049,12 @@ body.is-modal-open {
 
 .feature-subtitle {
   margin: calc(20px * var(--stage-scale)) 0 0;
-  color: #c1c1c1;
+  color: #a9a9a9;
   font-family: "FZLanTingXiHeiJian", "方正兰亭细黑", "FZLanTYJW_Xi", "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: calc(26px * var(--stage-scale));
   line-height: 1.4;
   font-weight: 300;
-  letter-spacing: calc(3px * var(--stage-scale));
+  letter-spacing: calc(1px * var(--stage-scale));
   white-space: nowrap;
 }
 

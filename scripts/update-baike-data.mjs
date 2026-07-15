@@ -18,15 +18,15 @@ const fallbackBaikeData = {
     totalEditUser: 8103108
   },
   history: [
-    { year: "1911", title: "波兰化学家C.丰克发现维生素并命名" },
-    { year: "1979", title: "中国有机化学家黄鸣龙逝世" },
-    { year: "2006", title: "首条连接西藏自治区的铁路青藏铁路权限通车" }
+    { year: "1911", title: "波兰化学家C.丰克发现维生素并命名", link: "https://baike.baidu.com/item/维生素" },
+    { year: "1979", title: "中国有机化学家黄鸣龙逝世", link: "https://baike.baidu.com/item/黄鸣龙" },
+    { year: "2006", title: "首条连接西藏自治区的铁路青藏铁路权限通车", link: "https://baike.baidu.com/item/青藏铁路" }
   ],
   hot: {
     today: [
-      { title: "旅游强国建设“十五五”规划", summary: "文化和旅游部印发的规划" },
-      { title: "2025年度国家科学技术奖", summary: "国家科学技术奖励工作办公室组织评选的奖项" },
-      { title: "消费者物价指数", summary: "度量居民消费商品和服务价格水平总体变动情况" }
+      { title: "旅游强国建设“十五五”规划", summary: "文化和旅游部印发的规划", url: "https://baike.baidu.com/item/旅游强国建设“十五五”规划" },
+      { title: "2025年度国家科学技术奖", summary: "国家科学技术奖励工作办公室组织评选的奖项", url: "https://baike.baidu.com/item/2025年度国家科学技术奖" },
+      { title: "消费者物价指数", summary: "度量居民消费商品和服务价格水平总体变动情况", url: "https://baike.baidu.com/item/消费者物价指数" }
     ],
     yesterday: []
   }
@@ -45,11 +45,39 @@ function stripHtml(value = "") {
     .trim();
 }
 
+function makeBaikeItemUrl(title = "") {
+  const cleanTitle = stripHtml(title);
+  return cleanTitle ? `https://baike.baidu.com/item/${encodeURIComponent(cleanTitle)}` : "";
+}
+
+function normalizeBaikeUrl(url = "", title = "") {
+  if (!url) return makeBaikeItemUrl(title);
+  try {
+    return new URL(url, "https://baike.baidu.com").href;
+  } catch {
+    return makeBaikeItemUrl(title);
+  }
+}
+
 function normalizeHotItems(items = []) {
   return items.slice(0, 8).map((item) => ({
     title: item.title || item.lemmaInfo?.title || "",
-    summary: item.wapAbstract || item.abstract || item.lemmaInfo?.lemmaDesc || ""
+    summary: item.wapAbstract || item.abstract || item.lemmaInfo?.lemmaDesc || "",
+    url: normalizeBaikeUrl(item.url || item.link || item.lemmaInfo?.link, item.title || item.lemmaInfo?.title || ""),
+    trend: item.trend || ""
   }));
+}
+
+function normalizeHistoryItems(items = []) {
+  return items.slice(0, 3).map((item) => {
+    const title = stripHtml(item.title || item.desc || "");
+    return {
+      year: String(item.year || ""),
+      title,
+      link: normalizeBaikeUrl(item.link, title),
+      desc: stripHtml(item.desc || "")
+    };
+  });
 }
 
 async function fetchJson(url, options = {}) {
@@ -82,10 +110,7 @@ async function getBaikeHomeData() {
       totalEditUser: Number(statsData.totalEditUser || fallbackBaikeData.stats.totalEditUser)
     },
     historyDate: `${month}月${day}日`,
-    history: (historyRaw.length ? historyRaw : fallbackBaikeData.history).slice(0, 3).map((item) => ({
-      year: String(item.year || ""),
-      title: stripHtml(item.title || item.desc || "")
-    })),
+    history: normalizeHistoryItems(historyRaw.length ? historyRaw : fallbackBaikeData.history),
     hot: {
       today: normalizeHotItems(hotData.today || fallbackBaikeData.hot.today),
       yesterday: normalizeHotItems(hotData.yesterday || [])
