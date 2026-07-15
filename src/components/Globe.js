@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "https://esm.sh/react@18.3.1";
 import * as THREE from "https://esm.sh/three@0.165.0";
-import { createGlobeScene, createStarField } from "../globe/createGlobe.js";
-import { createGlobeInteraction } from "../globe/interaction.js";
+import { createGlobeScene, createStarField } from "../globe/createGlobe.js?v=__BUILD_VERSION__";
+import { createGlobeInteraction } from "../globe/interaction.js?v=__BUILD_VERSION__";
 
 const h = React.createElement;
 

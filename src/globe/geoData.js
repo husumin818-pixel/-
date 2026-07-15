@@ -1,4 +1,4 @@
-import { LAND_MASK_BASE64, LAND_MASK_HEIGHT, LAND_MASK_WIDTH } from "./landMask.js";
+import { LAND_MASK_BASE64, LAND_MASK_HEIGHT, LAND_MASK_WIDTH } from "./landMask.js?v=__BUILD_VERSION__";
 
 export const cityNodes = [
   { name: "New York", lat: 40.7128, lon: -74.006, size: 1.2 },

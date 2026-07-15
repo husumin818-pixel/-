@@ -1,6 +1,6 @@
 import * as THREE from "https://esm.sh/three@0.165.0";
-import { createAtmosphereMaterial, createOceanMaterial, createParticleMaterial } from "./materials.js";
-import { cityNodes, dataLinks, elevationAt, landIntensity, latLonToVector3, oceanHeight, pacificSeamSignal } from "./geoData.js";
+import { createAtmosphereMaterial, createOceanMaterial, createParticleMaterial } from "./materials.js?v=__BUILD_VERSION__";
+import { cityNodes, dataLinks, elevationAt, landIntensity, latLonToVector3, oceanHeight, pacificSeamSignal } from "./geoData.js?v=__BUILD_VERSION__";
 
 export function createGlobeScene() {
   const group = new THREE.Group();

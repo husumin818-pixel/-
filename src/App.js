@@ -1,5 +1,5 @@
 import React from "https://esm.sh/react@18.3.1";
-import { Globe } from "./components/Globe.js";
+import { Globe } from "./components/Globe.js?v=__BUILD_VERSION__";
 
 const h = React.createElement;
 const brandPdfHref = "./baike-brand-vi.pdf";
