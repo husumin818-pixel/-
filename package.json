@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "node scripts/build-vercel.mjs",
     "start": "node server.mjs",
     "update:data": "node scripts/update-baike-data.mjs"
   }
