@@ -12,6 +12,7 @@ const copyEntries = [
   "fonts",
   "config",
   "downloads",
+  ".nojekyll",
   "baike-brand-vi.pdf"
 ];
 
