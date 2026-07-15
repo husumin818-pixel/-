@@ -27,7 +27,7 @@ for (const entry of copyEntries) {
 
 await mkdir(path.join(outDir, "api"), { recursive: true });
 await cp(
-  path.join(rootDir, "api", "baike-home-data.json"),
-  path.join(outDir, "api", "baike-home-data.json"),
+  path.join(rootDir, "api", "baike-home-snapshot.json"),
+  path.join(outDir, "api", "baike-home-snapshot.json"),
   { force: true }
 );

@@ -181,7 +181,7 @@ async function loadBaikeData() {
 
   const { month, day, monthDay } = formatDateParts();
   const [snapshotResponse, statsResponse, historyResponse, hotResponse] = await Promise.allSettled([
-    fetchJson(`./api/baike-home-data.json?t=${now}`),
+    fetchJson(`./api/baike-home-snapshot.json?t=${now}`),
     fetchJson(`https://baike.baidu.com/api/wikihome/totalnum?r=${Math.random()}`),
     fetchJson(`https://baikebcs.cdn.bcebos.com/cms/home/eventsOnHistory/${month}.json?t=${now}`),
     fetchJson(`https://baikebcs.cdn.bcebos.com/cms/home/hotLemmas.json?t=${now}`)

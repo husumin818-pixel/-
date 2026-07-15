@@ -3,7 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
-const outputPath = join(root, "api", "baike-home-data.json");
+const outputPath = join(root, "api", "baike-home-snapshot.json");
 
 const baikeHeaders = {
   "Accept": "application/json,text/plain,*/*",
