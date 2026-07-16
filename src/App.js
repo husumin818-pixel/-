@@ -366,8 +366,9 @@ function FirstModuleData() {
 }
 
 function StatLine({ value, label }) {
-  const [displayValue, setDisplayValue] = React.useState(0);
-  const lastValue = React.useRef(0);
+  const initialValue = Number(value || 0);
+  const [displayValue, setDisplayValue] = React.useState(initialValue);
+  const lastValue = React.useRef(initialValue);
 
   React.useEffect(() => {
     const nextValue = Number(value || 0);
