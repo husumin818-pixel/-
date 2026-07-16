@@ -12,6 +12,7 @@ const copyEntries = [
   "src",
   "images",
   "fonts",
+  "vendor",
   "config",
   "downloads",
   ".nojekyll",

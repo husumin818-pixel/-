@@ -1,4 +1,4 @@
-import * as THREE from "https://esm.sh/three@0.165.0";
+import * as THREE from "../../vendor/three.mjs";
 
 export function createGlobeInteraction({ canvas, camera, globe, particleMaterial }) {
   const minTilt = -0.56;

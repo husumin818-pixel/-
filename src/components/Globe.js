@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "https://esm.sh/react@18.3.1";
-import * as THREE from "https://esm.sh/three@0.165.0";
+import React, { useEffect, useRef } from "../../vendor/react.mjs";
+import * as THREE from "../../vendor/three.mjs";
 import { createGlobeScene, createStarField } from "../globe/createGlobe.js?v=__BUILD_VERSION__";
 import { createGlobeInteraction } from "../globe/interaction.js?v=__BUILD_VERSION__";
 

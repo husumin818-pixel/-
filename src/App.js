@@ -1,4 +1,4 @@
-import React from "https://esm.sh/react@18.3.1";
+import React from "../vendor/react.mjs";
 import { Globe } from "./components/Globe.js?v=__BUILD_VERSION__";
 
 const h = React.createElement;
