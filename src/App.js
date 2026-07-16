@@ -197,9 +197,15 @@ async function loadBaikeData() {
   }
 
   const snapshotData = snapshotResponse.status === "fulfilled" ? snapshotResponse.value : fallbackBaikeData;
-  const statsData = statsResponse.status === "fulfilled" && statsResponse.value?.errno === 0
+  const snapshotStats = snapshotData.stats || fallbackBaikeData.stats;
+  const liveStats = statsResponse.status === "fulfilled" && statsResponse.value?.errno === 0
     ? statsResponse.value.data
-    : snapshotData.stats || fallbackBaikeData.stats;
+    : null;
+  const statsData = {
+    totalLemma: Number(liveStats?.totalLemma) || Number(snapshotStats.totalLemma) || fallbackBaikeData.stats.totalLemma,
+    totalEditNum: Number(liveStats?.totalEditNum) || Number(snapshotStats.totalEditNum) || fallbackBaikeData.stats.totalEditNum,
+    totalEditUser: Number(liveStats?.totalEditUser) || Number(snapshotStats.totalEditUser) || fallbackBaikeData.stats.totalEditUser
+  };
   const historyMonth = historyResponse.status === "fulfilled" ? historyResponse.value?.[month] : null;
   const historyRaw = historyMonth?.[monthDay] || [];
   const hotData = hotResponse.status === "fulfilled" ? hotResponse.value : snapshotData.hot || fallbackBaikeData.hot;
@@ -208,9 +214,9 @@ async function loadBaikeData() {
   return {
     updatedAt: new Date(now).toISOString(),
     stats: {
-      totalLemma: Number(statsData.totalLemma || fallbackBaikeData.stats.totalLemma),
-      totalEditNum: Number(statsData.totalEditNum || fallbackBaikeData.stats.totalEditNum),
-      totalEditUser: Number(statsData.totalEditUser || fallbackBaikeData.stats.totalEditUser)
+      totalLemma: statsData.totalLemma,
+      totalEditNum: statsData.totalEditNum,
+      totalEditUser: statsData.totalEditUser
     },
     historyDate: `${month}月${day}日`,
     history: normalizeHistoryItems(historyRaw.length ? historyRaw : snapshotHistory),
