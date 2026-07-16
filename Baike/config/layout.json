@@ -1,0 +1,32 @@
+{
+  "designWidth": 2436,
+  "heroHeight": 1275,
+  "contentImageHeight": 8394,
+  "scaleStrategy": "fit-width",
+  "assets": {
+    "heroOverlay": "/images/baike-overlay.png",
+    "contentPanel": "/images/baike-content.png"
+  },
+  "positions": {
+    "globeStage": {
+      "left": 720,
+      "top": 390,
+      "width": 1636,
+      "height": 1270
+    },
+    "bottomMask": {
+      "left": 700,
+      "bottom": 0,
+      "height": 390
+    },
+    "contentPanel": {
+      "top": 1160
+    }
+  },
+  "globeView": {
+    "cameraPosition": [0.1, -0.62, 6.15],
+    "cameraLookAt": [0, -0.62, 0],
+    "globeRotation": [0, -0.58, 0.02],
+    "globePositionY": -1.08
+  }
+}
